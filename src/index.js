@@ -7,16 +7,31 @@ import React from 'react';
 
 import { createRoot } from 'react-dom/client';
 
+
+
 function App() {
-    const people = ["John", "Victor", "Michael"];
-    return people.map((person, id) => (
-        <List key={id} person={person} />
-    ));
+    const [language, setLanguage] = React.useState("java");
+    const [yearsExpirience, setYearsExpience] = React.useState(0);
+
+
+    return (
+        <div>
+            <button onClick={() => setLanguage('javascript')}>Change Language</button>
+
+            <input type="number"
+                onChange={event => setYearsExpience(event.target.value)}
+            />
+            <p>I'm learning {language} </p>
+            <p>Years of experience {yearsExpirience} </p>
+        </div>
+    )
+
+
 }
 
-function List(props) {
-    return <li>{props.person}</li>
-}
+// function List(props) {
+//     return <li>{props.person}</li>
+// }
 
 const container = document.getElementById('root');
 const root = createRoot(container);
