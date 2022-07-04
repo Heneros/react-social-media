@@ -10,55 +10,38 @@ import { createRoot } from 'react-dom/client';
 
 
 function App() {
-    const [count, setCount] = React.useState(0);
+    const [mousePosition, setMousePosition] = React.useState({ x: 9, y: 5 })
 
     React.useEffect(() => {
-        let timer = setTimeout(() => {
-            setCount((count) => count + 1);
-        }, 1000)
-    })
+        document.addEventListener('mousemove', handleMouseMode);
 
+        return () => {
+            document.removeEventListener('mousemove', handleMouseMode)
+        }
+    }, []);
 
-    const [developer, setDeveloper] = React.useState({
-        language: "JavaScript",
-        yearsExpirience: 0,
-        isEmployed: true
-    });
-
-
-    function handleChangeLanguage() {
-        setDeveloper({
-            language: "java",
-            yearsExpirience: 0,
-        })
+    function handleMouseMode(event) {
+        setMousePosition({ x: event.pageX, y: event.pageY });
     }
-    function handleYersExperience() {
-        setDeveloper({
-            language: "c#",
-            yearsExpirience: 5
-        })
-    }
-    function handleToggleEmployment() {
-        setDeveloper(prevState => ({
-            ...prevState,
-            isEmployed: !prevState.isEmployed
-        }))
-    }
-
     return (
         <div>
-            <p>Rendered {count}</p>
+            <p>
+                X: {mousePosition.x},
+                Y: {mousePosition.y},
+            </p>
         </div>
     )
 
 
 }
 
-// function List(props) {
-//     return <li>{props.person}</li>
-// }
+function NewPage(props) {
+    return <div> New Page</div>
+}
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(<App tab="home" />);
 // root.render(<App />);
+
+setTimeout(() => root.render(<NewPage />, container), 2000)
