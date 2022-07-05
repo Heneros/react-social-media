@@ -1,47 +1,44 @@
 import React, { useEffect } from 'react';
-// import ReactDOM from 'react-dom';
-// import { createRoot } from 'react-dom/client';
-// const container = document.getElementById('app');
-// const root = createRoot(container);
 
 
 import { createRoot } from 'react-dom/client';
 
-
+const endPoint = 'https://api.github.com/users/heneros';
 
 function App() {
-    const [mousePosition, setMousePosition] = React.useState({ x: 9, y: 5 })
+    const [user, setUser] = React.useState(null);
 
     React.useEffect(() => {
-        document.addEventListener('mousemove', handleMouseMode);
-
-        return () => {
-            document.removeEventListener('mousemove', handleMouseMode)
+        async function getUser() {
+            const response = await fetch(endPoint)
+            const data = await response.json()
+            setUser(data);
         }
+        getUser()
+
+
+        // fetch(endPoint)
+        //     .then(response => response.json())
+        //     // .then(data => console.log(data))
+        //     .then(data => setUser(data));
+
+
     }, []);
 
-    function handleMouseMode(event) {
-        setMousePosition({ x: event.pageX, y: event.pageY });
-    }
-    return (
+    return user ? (
         <div>
-            <p>
-                X: {mousePosition.x},
-                Y: {mousePosition.y},
-            </p>
+            <h1> {user.name} </h1>
+            <p> {user.bio} </p>
+            <p> {user.location} </p>
+            <img src={user.avatar_url} />
         </div>
-    )
-
-
+    ) : <p>loading</p>;
 }
 
-function NewPage(props) {
-    return <div> New Page</div>
-}
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(<App tab="home" />);
 // root.render(<App />);
 
-setTimeout(() => root.render(<NewPage />, container), 2000)
+// setTimeout(() => root.render(<NewPage />, container), 2000)
