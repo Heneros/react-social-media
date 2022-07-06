@@ -1,12 +1,19 @@
 import React from 'react';
 import Login from './components/Login';
+import Header from './components/Header';
 
 function App() {
-    let user = "";
+    const [user, setUser] = React.useState('');
+
+    React.useEffect(() => {
+        document.title = user ? `${user}'s Feed` : "Please Login";
+    }, [user]);
+
     if (!user) {
-        return <div> <Login /> </div>
+        return <div> <Login user={user} setUser={setUser} /> </div>
     }
 
+    return <> <Header user={user} setUser={setUser} /> </>
 }
 
 
