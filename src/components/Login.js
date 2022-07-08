@@ -7,12 +7,6 @@ function Login({ setUser, user }) {
         event.preventDefault();
         setUser(username)
     }
-    function handleValues(event) {
-        event.preventDefault();
-        console.log('Name ' + setUsername(username));
-
-
-    }
 
 
     return (<div>

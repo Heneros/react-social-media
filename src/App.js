@@ -5,6 +5,7 @@ import CreatePost from './components/CreatePost';
 
 function App() {
     const [user, setUser] = React.useState('');
+    const [posts, setPosts] = React.useState([]);
 
     React.useEffect(() => {
         document.title = user ? `${user}'s Feed` : "Please Login";
@@ -17,8 +18,21 @@ function App() {
     return (
         <>
             <Header user={user} setUser={setUser} />
-            <CreatePost />
-        </>)
+            <CreatePost user={user} setPosts={setPosts} posts={posts} />
+            {posts.map((post, i) => (
+                <React.Fragment key={i}>
+                    {post.image && (
+                        <img
+                            style={{ height: 100, width: 200, objectFit: 'cover' }}
+                            src={URL.createObjectURL(post.image)}
+                            alt="Post Image"
+                        />
+                    )}
+                    <p> {post.content}</p>
+                    <h5> {user}</h5>
+                </React.Fragment>
+            ))}
+        </>);
 }
 
 
