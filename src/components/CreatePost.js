@@ -4,6 +4,7 @@ function CreatePost({ user, setPosts, posts }) {
     const [content, setContent] = React.useState('');
     const [textValue, setTextArea] = React.useState('');
     const [image, setImage] = React.useState(null);
+    const imageInputRef = React.useRef();
 
 
     function handleSubmit(event) {
@@ -11,6 +12,9 @@ function CreatePost({ user, setPosts, posts }) {
         const post = { content, image, textValue, user };
         const newPosts = [post, ...posts];
         setPosts(newPosts);
+        setContent("");
+        setTextArea("");
+        imageInputRef.current.value = '';
     }
 
 
@@ -21,11 +25,16 @@ function CreatePost({ user, setPosts, posts }) {
                 type="text"
                 placeholder='Add Post'
                 onChange={event => setContent(event.target.value)}
+                value={content}
             />
-            <textarea onChange={event => setTextArea(event.target.value)} />
+            <textarea
+                onChange={event => setTextArea(event.target.value)}
+                value={textValue}
+            />
             <input
                 type="file"
                 onChange={event => setImage(event.target.files[0])}
+                ref={imageInputRef}
             />
             <button type='submit'>Submit</button>
         </form>
