@@ -1,7 +1,20 @@
 import React from 'react';
 
-function Post() {
-    return <div>Post </div>
+function Post({ image, content, textValue, user }) {
+    return (
+        <>
+            Image: {image && (
+                <img
+                    style={{ height: 100, width: 200, objectFit: 'cover' }}
+                    src={URL.createObjectURL(image)}
+                    alt="Post Image"
+                />
+            )}
+            <div>   Post Name: <p> {content}</p> </div>
+            <div>   TextArea: <p> {textValue}</p> </div>
+            Author Name: <h5> {user}</h5>
+        </>
+    )
 }
 
 
