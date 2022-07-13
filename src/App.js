@@ -4,6 +4,7 @@ import Header from './components/Header';
 import CreatePost from './components/CreatePost';
 import PostList from './components/PostList';
 
+const UserContext = React.createContext();
 
 function App() {
     const [user, setUser] = React.useState('');
@@ -24,8 +25,8 @@ function App() {
     return (
         <>
             <Header user={user} setUser={setUser} />
-            <CreatePost user={user} handleAddPost={handleAddPost}  />
-            <PostList posts={posts} />
+            <CreatePost user={user} handleAddPost={handleAddPost} />
+            <PostList user={user} posts={posts} />
         </>);
 }
 
