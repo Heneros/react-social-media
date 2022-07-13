@@ -4,7 +4,6 @@ import Header from './components/Header';
 import CreatePost from './components/CreatePost';
 import PostList from './components/PostList';
 
-const UserContext = React.createContext();
 
 function App() {
     const [user, setUser] = React.useState('');
