@@ -5,8 +5,12 @@ import CreatePost from './components/CreatePost';
 import PostList from './components/PostList';
 
 
+export const UserContext = React.createContext();
+
+
+
 function App() {
-    const [user, setUser] = React.useState('');
+    const [user, setUser] = React.useState('Rustam');
     const [posts, setPosts] = React.useState([]);
 
     React.useEffect(() => {
@@ -22,11 +26,11 @@ function App() {
     }
 
     return (
-        <>
+        <UserContext.Provider value={user}>
             <Header user={user} setUser={setUser} />
             <CreatePost user={user} handleAddPost={handleAddPost} />
-            <PostList user={user} posts={posts} />
-        </>);
+            <PostList posts={posts} />
+        </UserContext.Provider>);
 }
 
 
