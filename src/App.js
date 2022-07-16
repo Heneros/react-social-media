@@ -6,11 +6,16 @@ import PostList from './components/PostList';
 
 
 export const UserContext = React.createContext();
-
+export const PostContext = React.createContext({
+    posts: []
+});
 
 
 function App() {
+    const initialPostState = React.useContext(PostContext);
+    const [state, dispatch] = React.useReducer(() => { }, initialPostState);
     const [user, setUser] = React.useState('Rustam');
+
     const [posts, setPosts] = React.useState([]);
 
     React.useEffect(() => {
