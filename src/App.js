@@ -18,7 +18,14 @@ function reducer() {
 function App() {
 
     const [] = useReducer(reducer, { count: 0 });
+    const [count, setCount] = useState(0);
 
+    function increment() {
+        setCount(prevCount => prevCount + 1);
+    }
+    function decrement() {
+        setCount(prevCount => prevCount + 1);
+    }
     // const initialPostState = React.useContext(PostContext);
     // const [state, dispatch] = React.useReducer(postReducer, initialPostState);
     // const [user, setUser] = React.useState('Rustam');
@@ -38,9 +45,11 @@ function App() {
     // }
 
     return (
-        <div>
-            dsfdsfsdf
-        </div>
+        <>
+            <button onClick={decrement}>-</button>
+            <span>{count} </span>
+            <button onClick={increment}>+</button>
+        </>
         // <PostContext.Provider value={{ state, dispatch }}>
         //     <UserContext.Provider value={user}>
         //         <Header user={user} setUser={setUser} />
