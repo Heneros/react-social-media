@@ -11,7 +11,7 @@ function CreatePost({ user, handleAddPost }) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        const post = { content, image, textValue, user };
+        const post = { content, image, textValue, user, id: Date.now() };
         // handleAddPost(post)
         // const newPosts = [post, ...posts];
         // setPosts(newPosts);
